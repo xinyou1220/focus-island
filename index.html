@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5ec">
+  <meta name="description" content="把專注的時間，種成一座小島。專注計時、日常任務與植物收藏，陪你慢慢完成想做的事。">
+  <title>專注小島 Focus Island</title>
+  <style>
+    :root{--paper:#f5f5ec;--card:#fffef8;--ink:#263e32;--muted:#758071;--line:#dce0d0;--lime:#d5ee90;--lime-hover:#c6e779;--pale:#eaf0df;--clay:#bb7257;--shadow:0 10px 30px #233c2d05;--radius:22px;--sans:Inter,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;--serif:Georgia,"Noto Serif TC","PMingLiU",serif}
+    *{box-sizing:border-box}[hidden]{display:none!important}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6}button,input,select{font:inherit;color:inherit}button,a,input,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.48}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #698c43;outline-offset:4px}button{border:0;background:none}a{color:inherit}svg{display:block}button svg{flex:none}.icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip-link{position:fixed;top:10px;left:10px;padding:10px 20px;background:var(--ink);color:white;z-index:20;transform:translateY(-150%)}.skip-link:focus{transform:translateY(0)}
+    .sidebar{position:fixed;inset:0 auto 0 0;width:198px;padding:36px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:3;background:var(--paper)}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;margin:0 0 54px 7px}.brand-mark{width:39px;height:43px;flex:none}.brand-name{font-size:19px;font-weight:700;letter-spacing:2px;line-height:1.4}.brand-name small{display:block;font-size:9px;font-weight:600;letter-spacing:2px}.side-label{font-size:10px;letter-spacing:2.2px;color:var(--muted);margin:0 16px 14px}.nav{display:flex;flex-direction:column;gap:9px}.nav a{display:flex;align-items:center;gap:12px;padding:13px 16px;text-decoration:none;border-radius:11px;font-size:13px;color:#697666}.nav a:hover{background:#e9eddf}.nav a.active{background:#e6ebd9;color:var(--ink);font-weight:600}.nav .icon{width:18px;height:18px}.sidebar-foot{margin-top:auto;padding:24px 10px 0}.storage-status{display:flex;gap:7px;align-items:center;font-size:11px;font-weight:600}.status-dot{width:6px;height:6px;background:#75955d;border-radius:50%;flex:none}.storage-detail{font-size:10px;color:var(--muted);line-height:1.8;margin:8px 0 21px}.help-button{display:flex;align-items:center;gap:8px;font-size:12px;padding:0;color:#687563}.help-button .icon{width:16px;height:16px}.edition{font-size:9px;letter-spacing:1.8px;color:#9ba18f;margin-top:33px}
+    main{margin-left:198px;padding:30px 42px 27px;max-width:1580px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:27px}.breadcrumb{font-size:11px;letter-spacing:.8px;color:var(--muted);display:flex;gap:12px;align-items:center}.breadcrumb span:last-child{color:var(--ink)}.day-label{font-size:11px;color:#6c7867;display:flex;align-items:center;gap:9px}.day-label .icon{width:15px;height:15px}.intro{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.eyebrow{font-size:10px;letter-spacing:2.6px;color:var(--clay);font-weight:600;margin:0 0 7px}.intro h1{font-size:31px;letter-spacing:1px;line-height:1.35;font-weight:500;margin:0 0 8px;font-family:var(--serif)}.intro h1 em{font-style:normal;color:#6d8b4b}.intro p{margin:0;color:var(--muted);font-size:12px;letter-spacing:.3px}.slow-note{display:flex;align-items:center;gap:8px;font-size:11px;color:#7b866e;border:1px solid var(--line);border-radius:30px;padding:8px 13px;white-space:nowrap}.slow-note .icon{width:15px;height:15px}
+    .main-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(330px,1fr);gap:22px;align-items:stretch}.island-column{display:flex;flex-direction:column;gap:16px;min-width:0}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.island-card{position:relative;overflow:hidden;min-height:370px;flex:1;background:#edf1e3}.island-heading{display:flex;justify-content:space-between;align-items:start;padding:24px 25px 0;position:relative;z-index:1}.section-kicker{font-size:9px;letter-spacing:2px;color:#82906f;line-height:1.3}.island-heading h2{font-size:17px;font-weight:500;margin:5px 0 0;letter-spacing:1px}.season{font-size:10px;color:#708258;display:flex;gap:5px;align-items:center}.season svg{width:14px;height:14px}.island-art{width:100%;height:auto;margin-top:-2px;aspect-ratio:600/300;overflow:visible}.cloud{animation:float-cloud 9s ease-in-out infinite}.cloud.second{animation-delay:-4s}.island-floating{animation:float-island 7s ease-in-out infinite;transform-origin:50% 55%}.island-bottom{display:flex;align-items:center;justify-content:space-between;padding:0 25px 22px;gap:12px;position:relative;z-index:1}.island-caption{font-size:11px;line-height:1.8;color:#758164;margin:0}.island-caption strong{font-weight:500;color:#405b35}.island-index{font-size:10px;color:#849273;letter-spacing:1.5px;border:1px solid #d2dbc0;border-radius:30px;padding:5px 10px;white-space:nowrap}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.metric{border:1px solid var(--line);border-radius:15px;padding:14px 17px 13px;background:#fafbf3}.metric-top{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:#7b8572;gap:5px}.metric-top svg{width:14px;height:14px;opacity:.7}.metric-number{font-size:29px;line-height:1.3;font-family:var(--serif);margin-top:6px;font-variant-numeric:tabular-nums;letter-spacing:-1px}.metric-number small{font-size:10px;font-family:var(--sans);letter-spacing:0;color:#8a937f;margin-left:5px}
+    .timer-card{padding:22px 27px 21px;display:flex;flex-direction:column;align-items:center;position:relative;min-width:0}.timer-top{display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px}.timer-title{font-size:12px;font-weight:500;display:flex;align-items:center;gap:7px}.timer-title .icon{width:16px;height:16px}.session-badge{font-size:9px;border:1px solid var(--line);padding:3px 8px;border-radius:20px;color:#849078;letter-spacing:1px}.mode-tabs{display:flex;border-radius:30px;background:#eff2e8;padding:4px;gap:4px;margin-top:18px}.mode-tabs button{font-size:11px;padding:7px 25px;border-radius:25px;color:#859076;min-width:94px}.mode-tabs button[aria-pressed=true]{background:var(--card);box-shadow:0 2px 6px #2c432610;color:var(--ink)}.timer-dial{width:228px;height:228px;position:relative;margin:12px 0 9px;flex:none}.timer-dial>svg{width:100%;height:100%;transform:rotate(-90deg)}.dial-track{fill:none;stroke:#eef0e5;stroke-width:3}.dial-progress{fill:none;stroke:#b2c778;stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset .25s linear}.dial-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.dial-leaf{width:19px;height:19px;color:#93a66d;margin-bottom:3px}.timer-display{font-size:55px;letter-spacing:-2.5px;font-weight:400;font-family:var(--serif);font-variant-numeric:tabular-nums;line-height:1.25}.timer-status{font-size:10px;letter-spacing:2px;color:#859075;margin-top:9px;max-width:180px;text-align:center;min-height:17px}.presets{display:flex;gap:7px;justify-content:center;flex-wrap:wrap}.presets button{font-size:11px;border:1px solid var(--line);border-radius:7px;padding:5px 11px;min-width:53px;color:#839070}.presets button[aria-pressed=true]{border-color:#a7bb7c;background:#ecf2dc;color:#4e6638}.presets button:hover{border-color:#9caf7b}.task-selector{position:relative;width:100%;margin:17px 0 12px}.task-selector select{width:100%;background:#fafbf5;border:1px solid #e4e7dc;border-radius:9px;padding:9px 30px 9px 12px;font-size:11px;color:#6b785e;text-overflow:ellipsis}.timer-actions{display:flex;align-items:center;gap:9px;width:100%}.primary-button{background:var(--lime);border:1px solid transparent;border-radius:10px;padding:12px 17px;display:flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:12px;transition:background .15s,transform .15s}.primary-button:hover{background:var(--lime-hover)}.primary-button:active{transform:translateY(1px)}.primary-button .icon{width:15px;height:15px}.start-button{flex:1}.reset-button{width:43px;height:45px;border:1px solid var(--line);border-radius:10px;display:grid;place-items:center}.reset-button .icon{width:17px;height:17px}.reset-button:hover{background:#f0f3e7}.demo-row{display:flex;align-items:center;justify-content:center;gap:7px;margin:13px 0 0;font-size:9px;color:#8c947e;flex-wrap:wrap}.demo-button{color:#8c6e4b;text-decoration:underline;text-underline-offset:3px;padding:0;font-size:10px}.timer-notice{font-size:10px;color:var(--clay);text-align:center;line-height:1.6;min-height:16px;margin:9px 0 0}.timer-card.break-mode .dial-progress{stroke:#b9a391}.timer-card.demo-mode .session-badge{color:var(--clay);border-color:#d7b6a5;background:#fbf1e9}
+    .bottom-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(330px,1fr);gap:22px;margin-top:22px;align-items:start}.tasks-card,.collection-card{padding:23px 25px;min-width:0;min-height:279px}.card-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:17px}.heading-group{display:flex;align-items:baseline;gap:9px}.card-heading h2{font-size:16px;font-weight:500;letter-spacing:.5px;margin:0}.small-count{font-size:10px;color:#8b947d}.text-button{padding:1px 0;font-size:10px;color:#83906e;text-underline-offset:4px;display:flex;gap:5px;align-items:center}.text-button:hover{text-decoration:underline}.text-button .icon{width:13px;height:13px}.task-form{display:flex;gap:7px}.task-input{width:100%;min-width:0;flex:1;border:1px solid var(--line);border-radius:9px;background:#fbfcf5;padding:10px 12px;font-size:11px}.task-input::placeholder{color:#a0a792}.add-button{width:39px;border:1px solid #c9d4b1;border-radius:9px;background:#e8efdb;display:grid;place-items:center}.add-button:hover{background:#dde9c7}.add-button .icon{width:16px;height:16px}.field-error{color:#a4553b;font-size:10px;min-height:16px;margin:3px 0}.filter-row{display:flex;justify-content:space-between;align-items:center;margin:6px 0 10px;gap:10px}.filters{display:flex;gap:15px}.filters button{font-size:10px;color:#95a083;padding:3px 0;border-bottom:1px solid transparent}.filters button[aria-pressed=true]{color:var(--ink);border-color:#8fa66b}.remaining-count{font-size:9px;color:#8a947c}.task-list{list-style:none;margin:0;padding:0;max-height:279px;overflow-y:auto;scrollbar-width:thin}.task-item{display:flex;align-items:center;gap:10px;min-height:43px;border-bottom:1px solid #eceee4;animation:appear .18s ease}.task-item:last-child{border-bottom:none}.task-check{appearance:none;width:16px;height:16px;flex:none;border:1px solid #c6ceb9;border-radius:5px;background:#fffef8;margin:0;cursor:pointer;display:grid;place-items:center}.task-check:checked{background:#b4cc83;border-color:#a7bd79}.task-check:checked::after{content:"";width:7px;height:4px;border:solid #38512c;border-width:0 0 1.5px 1.5px;transform:rotate(-45deg) translateY(-1px)}.task-text{font-size:11px;flex:1;min-width:0;overflow-wrap:anywhere;padding:8px 0;cursor:pointer}.task-item.done .task-text{text-decoration:line-through;color:#a1a892}.delete-task{color:#adb39f;padding:6px;border-radius:5px;display:grid;place-items:center}.delete-task:hover{color:var(--clay);background:#fbefe7}.delete-task .icon{width:14px;height:14px}.empty-tasks{padding:9px 0 2px;text-align:center}.empty-tasks p{font-size:11px;color:#7d896e;margin:3px 0 11px}.empty-tasks small{display:block;font-size:9px;color:#a0a68f}.suggestions{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:9px}.suggestion{border:1px dashed #ced7bb;border-radius:20px;font-size:9px;padding:4px 8px;color:#7b8c65}.suggestion:hover{background:#edf3df}.collection-subtitle{font-size:10px;color:#899378;margin:-9px 0 15px}.plant-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.plant-tile{position:relative;border:1px solid #e2e6d7;border-radius:12px;background:#f9faf2;min-height:111px;padding:8px 6px 9px;display:flex;flex-direction:column;align-items:center}.plant-tile:hover{background:#edf2df;border-color:#b7c892}.plant-tile>svg{width:64px;height:69px;overflow:visible}.plant-name{font-size:9px;color:#697b55}.plant-tiny-badge{position:absolute;top:5px;right:5px;font-size:7px;line-height:1;padding:3px 4px;border:1px solid #e3cfbc;border-radius:4px;color:#ab8064;background:#fff9ef}.empty-garden{height:152px;border:1px dashed #d6ddc5;border-radius:12px;background:#f9faf1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px}.empty-garden svg{width:36px;height:39px;color:#9bad80;opacity:.8}.empty-garden p{font-size:10px;color:#80916a;margin:0}.empty-garden small{font-size:9px;color:#a4ac94}.page-footer{display:flex;justify-content:space-between;gap:15px;font-size:9px;color:#9da58f;letter-spacing:.5px;margin-top:23px;padding:0 2px}.page-footer span:last-child{letter-spacing:1.8px;font-size:8px}
+    dialog{border:1px solid #cfd8bd;border-radius:22px;background:var(--card);color:var(--ink);padding:29px;max-width:min(460px,calc(100% - 32px));width:100%;box-shadow:0 25px 100px #1e392a25}dialog::backdrop{background:#263c3150;backdrop-filter:blur(3px)}dialog h2{font-size:21px;font-weight:500;font-family:var(--serif);margin:0 0 12px}dialog p{font-size:12px;color:#78836a;line-height:1.9;margin:10px 0}dialog ul{padding-left:18px;font-size:12px;color:#78836a;line-height:1.9}dialog strong{color:#4f6540;font-weight:600}.dialog-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:23px}.secondary-button{border:1px solid var(--line);padding:10px 17px;border-radius:9px;font-size:12px;background:#f9faf3}.secondary-button:hover{background:#edf2e1}.dialog-close{position:absolute;right:17px;top:16px;width:28px;height:28px;display:grid;place-items:center;color:#8c967d;border-radius:50%}.dialog-close:hover{background:#edf1e3}.dialog-close .icon{width:17px;height:17px}.custom-label{display:block;font-size:12px;margin:20px 0 7px}.custom-field{display:flex;align-items:center;gap:10px;font-size:12px}.custom-field input{width:125px;padding:10px 14px;border:1px solid var(--line);border-radius:9px;background:#fafbf4}.detail-plant{width:124px;height:140px;margin:8px auto 16px}.detail-label{display:block;text-align:center;font-size:10px;color:var(--clay);letter-spacing:1px}.detail-title{text-align:center}.detail-info{text-align:center}.garden-dialog{max-width:min(640px,calc(100% - 32px));max-height:85vh}.garden-dialog .plant-grid{grid-template-columns:repeat(4,1fr);margin-top:20px}.garden-dialog .plant-tile{min-height:120px}.load-more{margin:18px auto 0;display:block}.toast{position:fixed;bottom:24px;left:calc(50% + 99px);transform:translate(-50%,20px);display:flex;align-items:center;gap:15px;padding:13px 18px;background:var(--ink);color:#f9fbed;border-radius:12px;box-shadow:0 7px 30px #253b2d20;z-index:10;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:calc(100vw - 32px);font-size:12px}.toast.visible{opacity:1;transform:translate(-50%,0);pointer-events:auto}.toast button{font-size:11px;color:var(--lime);padding:0;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}.leaf-burst{position:fixed;inset:0;pointer-events:none;z-index:9;overflow:hidden}.burst-leaf{position:absolute;width:10px;height:17px;background:#afc882;border-radius:90% 0 90% 0;top:33%;left:65%;animation:leaf-fall 1.9s ease-out forwards;opacity:0}.burst-leaf:nth-child(3n){background:#d6ac83}.burst-leaf:nth-child(2n){background:#d4e68e}@keyframes float-island{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}@keyframes float-cloud{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}@keyframes appear{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}@keyframes leaf-fall{0%{transform:translate(0,0) rotate(0);opacity:0}10%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+    @media(min-width:1700px){main{margin-right:auto;margin-left:auto;padding-left:240px;max-width:1640px}.sidebar{width:198px}}
+    @media(max-width:1180px){.sidebar{width:168px;padding:30px 16px}.brand{gap:8px;margin-left:3px}.brand-name{font-size:17px}.brand-name small{font-size:8px}.brand-mark{width:33px}.nav a{padding:12px}.sidebar-foot{padding-left:6px;padding-right:6px}main{margin-left:168px;padding:28px}.main-grid,.bottom-grid{gap:17px;grid-template-columns:minmax(0,1.16fr) minmax(310px,1fr)}.timer-card{padding:21px}.island-heading{padding:22px 20px 0}.island-bottom{padding:0 20px 21px}.metric{padding:13px 12px}.metric-top{font-size:9px}.intro h1{font-size:28px}.slow-note{display:none}.toast{left:calc(50% + 84px)}.tasks-card,.collection-card{padding:21px}.plant-grid{gap:7px}}
+    @media(max-width:980px) and (min-width:761px){.sidebar{width:82px;padding:28px 12px}.brand{margin:0 auto 46px}.brand-name,.side-label,.nav a span,.sidebar-foot .storage-detail,.sidebar-foot .edition,.storage-status span,.help-button span{display:none}.brand-mark{width:37px}.nav a{padding:15px;justify-content:center}.nav .icon{width:21px;height:21px}.sidebar-foot{padding:0;display:flex;flex-direction:column;align-items:center;gap:21px}.storage-status .status-dot{width:7px;height:7px}.help-button .icon{width:20px;height:20px}main{margin-left:82px;padding:26px}.main-grid,.bottom-grid{grid-template-columns:minmax(0,1fr) minmax(300px,1fr)}.island-art{margin-top:23px}.island-heading{padding:20px 18px 0}.island-bottom{padding:0 18px 21px}.season span{display:none}.metric{padding:12px 10px}.metric-top .icon{display:none}.metric-number{font-size:25px}.island-caption{font-size:10px}.island-index{display:none}.tasks-card,.collection-card{padding:20px 17px}.toast{left:calc(50% + 41px)}.filters{gap:10px}}
+    @media(max-width:760px){html{scroll-padding-top:16px}.sidebar{position:static;width:100%;height:auto;padding:18px 22px;border-right:0;border-bottom:1px solid var(--line);flex-direction:row;align-items:center;justify-content:space-between}.brand{margin:0;gap:8px}.brand-mark{width:31px;height:35px}.brand-name{font-size:17px}.brand-name small{font-size:7px}.side-label,.sidebar-foot,.nav a span{display:none}.nav{flex-direction:row;gap:5px}.nav a{padding:10px}.nav .icon{width:19px;height:19px}main{margin:0;padding:22px 20px}.topbar{margin-bottom:24px}.breadcrumb{font-size:10px}.day-label{font-size:10px}.day-label .icon{display:none}.intro{margin-bottom:22px}.intro h1{font-size:28px}.intro p{font-size:11px}.eyebrow{font-size:9px}.main-grid,.bottom-grid{grid-template-columns:1fr;gap:19px}.island-column{gap:13px}.island-card{min-height:0}.island-heading{padding:22px 22px 0;flex-direction:column;gap:10px}.season{white-space:nowrap}.island-art{margin-top:0;max-height:330px}.island-bottom{padding:0 22px 20px;flex-wrap:wrap;gap:8px}.island-caption{font-size:10px;flex-basis:100%}.island-index{font-size:9px}.metrics{gap:9px}.metric{padding:13px}.metric-top{font-size:9px}.metric-number{font-size:29px}.timer-card{padding:23px 25px}.timer-dial{width:240px;height:240px;margin:10px 0}.timer-display{font-size:59px}.timer-top{max-width:480px}.mode-tabs{margin-top:19px}.task-selector,.timer-actions{max-width:480px}.task-selector{margin-top:19px}.demo-row{font-size:10px}.bottom-grid{margin-top:19px}.tasks-card,.collection-card{padding:23px;min-height:0}.collection-card{min-height:244px}.plant-grid{grid-template-columns:repeat(3,1fr);gap:11px}.plant-tile{min-height:123px}.plant-tile>svg{width:74px;height:80px}.plant-name{font-size:10px}.page-footer{margin-top:25px;align-items:center}.page-footer span:last-child{display:none}.toast{left:50%;width:max-content;bottom:18px}.garden-dialog .plant-grid{grid-template-columns:repeat(3,1fr)}.garden-dialog .plant-tile{min-height:108px}.garden-dialog .plant-tile>svg{width:57px;height:62px}.mobile-help{display:inline-flex!important;align-items:center;gap:5px}.mobile-help .icon{width:14px;height:14px}}
+    @media(max-width:360px){main{padding:20px 14px}.sidebar{padding:16px}.intro h1{font-size:25px}.metric{padding:11px 10px}.metric-top .icon{display:none}.day-label{font-size:9px}.timer-card{padding:22px}.island-index{display:none}.garden-dialog .plant-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.leaf-burst{display:none}}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">跳到主要內容</a>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden"><defs>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/></symbol>
+    <symbol id="i-checklist" viewBox="0 0 24 24"><path d="m3 6 2 2 4-4m-6 12 2 2 4-4M13 6h8m-8 10h8"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M19 3c-9-1-15 4-14 10 1 8 14 9 14-10Z"/><path d="M4 21C7 14 11 9 16 6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6m-3 0v3m6 1 2-2"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4m0 3h.01"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14m8-14v14" stroke-width="4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V3m0 0c5-4 9 4 14 0v10c-5 4-9-4-14 0"/></symbol>
+    <symbol id="plant-sprout" viewBox="0 0 100 110"><ellipse cx="50" cy="99" rx="24" ry="5" fill="#e2e8d5"/><path d="M35 79h30l-5 21H40Z" fill="#c68e70"/><path d="M33 77h34v7H33Z" fill="#d4a185"/><path d="M50 78V44" fill="none" stroke="#6f8950" stroke-width="3" stroke-linecap="round"/><path d="M50 60C26 61 24 40 25 35c19 1 28 11 25 25Z" fill="#90ad64"/><path d="M50 49c-1-21 14-29 27-27 0 18-9 29-27 27Z" fill="#b6ce79"/><path d="M50 69c4-14 13-18 25-15-3 13-12 18-25 15Z" fill="#789b54"/></symbol>
+    <symbol id="plant-fern" viewBox="0 0 100 110"><ellipse cx="50" cy="99" rx="24" ry="5" fill="#e2e8d5"/><path d="M35 79h30l-5 21H40Z" fill="#baa480"/><path d="M33 77h34v7H33Z" fill="#caba98"/><path d="M50 79V25m0 50L30 46m20 27 20-29" fill="none" stroke="#60804b" stroke-width="2.5"/><path d="M49 64c-12 1-16-6-17-12 10-2 17 4 17 12m1-11c-13 1-18-7-17-13 10 0 17 5 17 13m0-12c-10 0-14-7-12-13 9 1 13 6 12 13m1-5c1-10 5-14 10-16 5 8-1 15-10 16m0 16c0-11 9-18 19-16-1 10-6 16-19 16m0 11c1-11 9-16 19-14-1 10-8 15-19 14M37 60c-9 3-16-1-18-7 8-2 15 0 18 7m25-3c9 2 16-1 18-7-8-3-15 1-18 7" fill="#7b9b61"/></symbol>
+    <symbol id="plant-bloom" viewBox="0 0 100 110"><ellipse cx="50" cy="99" rx="24" ry="5" fill="#e2e8d5"/><path d="M35 79h30l-5 21H40Z" fill="#b28d72"/><path d="M33 77h34v7H33Z" fill="#cba68b"/><path d="M50 78V41m0 26L36 55m14 8 14-12" fill="none" stroke="#748a50" stroke-width="2.5"/><path d="M49 68c-17 2-22-8-23-14 14-3 23 5 23 14m2-5c1-15 10-20 22-17-2 14-10 18-22 17" fill="#9cb374"/><g fill="#cb9b7f"><ellipse cx="50" cy="29" rx="7" ry="13"/><ellipse cx="50" cy="48" rx="7" ry="13"/><ellipse cx="40" cy="36" rx="7" ry="13" transform="rotate(-60 40 36)"/><ellipse cx="60" cy="36" rx="7" ry="13" transform="rotate(60 60 36)"/><ellipse cx="41" cy="46" rx="7" ry="13" transform="rotate(60 41 46)"/><ellipse cx="59" cy="46" rx="7" ry="13" transform="rotate(-60 59 46)"/></g><circle cx="50" cy="39" r="8" fill="#e5d8a1"/></symbol>
+    <symbol id="plant-tree" viewBox="0 0 100 110"><ellipse cx="50" cy="100" rx="25" ry="5" fill="#e2e8d5"/><path d="M36 81h28l-5 20H41Z" fill="#bd9274"/><path d="M34 79h32v6H34Z" fill="#d0a78a"/><path d="M50 80V40m0 23L37 49m13 6 13-14" fill="none" stroke="#877c51" stroke-width="3"/><path d="M32 60c-13-4-13-21-3-27-1-13 10-22 22-17 12-7 25 3 23 16 12 10 8 26-6 30-8 11-26 10-36-2Z" fill="#91ad69"/><path d="M31 48c-5-6-3-14 3-17 1-11 13-17 22-11-8 3-6 15-1 18-6 10-15 13-24 10Z" fill="#adc783"/><circle cx="65" cy="45" r="4" fill="#cddc9b"/></symbol>
+  </defs></svg>
+  <aside class="sidebar" aria-label="主要導覽">
+    <a class="brand" href="#main" aria-label="專注小島首頁"><svg class="brand-mark" viewBox="0 0 45 48" aria-hidden="true"><path d="m3 34 19 10 20-10-20-9Z" fill="#9eb76d"/><path d="m3 34 19 10v4L3 39Z" fill="#849860"/><path d="m22 44 20-10v5L22 48Z" fill="#aab786"/><path d="M23 32V15" fill="none" stroke="#536d40" stroke-width="2"/><path d="M23 24C11 23 10 14 11 10c9 1 14 6 12 14Z" fill="#829d55"/><path d="M23 18C22 6 31 2 37 3c0 10-5 16-14 15Z" fill="#b7ce7c"/></svg><span class="brand-name">專注小島<small>FOCUS ISLAND</small></span></a>
+    <p class="side-label">YOUR LITTLE SPACE</p>
+    <nav class="nav"><a href="#main" class="active" data-nav="main" aria-current="page" aria-label="我的小島"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span>我的小島</span></a><a href="#tasks" data-nav="tasks" aria-label="日常任務"><svg class="icon" aria-hidden="true"><use href="#i-checklist"/></svg><span>日常任務</span></a><a href="#collection" data-nav="collection" aria-label="植物收藏"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg><span>植物收藏</span></a></nav>
+    <div class="sidebar-foot"><div class="storage-status" id="storageStatus"><i class="status-dot" aria-hidden="true"></i><span>本機保存已開啟</span></div><p class="storage-detail" id="storageDetail">你的小島，會留在這個瀏覽器。<br>下次回來，再接著慢慢長大。</p><button class="help-button" id="helpButton" aria-label="使用說明與保存狀態"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg><span>使用說明</span></button><div class="edition">A LITTLE EVERY DAY. / 01</div></div>
+  </aside>
+  <main id="main">
+    <header class="topbar"><div class="breadcrumb"><span>我的空間</span><span aria-hidden="true">/</span><span>專注小島</span></div><time class="day-label" id="todayDate"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg><span></span></time></header>
+    <section class="intro" aria-labelledby="pageTitle"><div><div class="eyebrow">MAKE ROOM FOR WHAT MATTERS</div><h1 id="pageTitle">把時間，種成<em>喜歡的樣子。</em></h1><p id="greeting">留一點時間給自己，讓每一份專注慢慢發芽。</p></div><div class="slow-note"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg>不用很快，只要慢慢往前。</div></section>
+    <div class="main-grid">
+      <section class="island-column" aria-labelledby="islandTitle">
+        <div class="card island-card"><div class="island-heading"><div><span class="section-kicker">MY GROWING ISLAND</span><h2 id="islandTitle">每一點專注，都會留下風景。</h2></div><div class="season"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg><span>適合生長的一天</span></div></div>
+          <svg class="island-art" viewBox="0 0 600 300" role="img" id="islandImage" aria-labelledby="islandSvgTitle islandSvgDesc"><title id="islandSvgTitle">你正在慢慢種植的專注小島</title><desc id="islandSvgDesc">一座有小池塘、石子與步道的綠色浮島，完成專注後會長出收藏植物。</desc><defs><linearGradient id="islandGrass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c9db9f"/><stop offset="1" stop-color="#aebf83"/></linearGradient><linearGradient id="islandSoil" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c1b292"/><stop offset="1" stop-color="#a7a584"/></linearGradient><radialGradient id="islandShadow"><stop stop-color="#bbc3a7" stop-opacity=".35"/><stop offset="1" stop-color="#bbc3a7" stop-opacity="0"/></radialGradient></defs>
+            <ellipse cx="302" cy="272" rx="168" ry="21" fill="url(#islandShadow)"/>
+            <g class="cloud"><path d="M71 98c-4-12 9-20 18-14 0-18 28-22 33-4 15-7 27 5 23 18Z" fill="#fafcf1" opacity=".9"/><path d="M77 109h52" stroke="#dfe6d2" stroke-width="1" stroke-linecap="round"/></g><g class="cloud second"><path d="M433 62c-2-9 7-16 15-11 2-16 23-19 28-4 12-4 24 6 20 15Z" fill="#fafcf1" opacity=".8"/></g><path d="m493 152 4-7m-2 15 8-2M102 192l-5-5m7 14-8 1" stroke="#b9c79c" stroke-width="1.5" stroke-linecap="round"/><g fill="#b5c694"><circle cx="173" cy="65" r="1.5"/><circle cx="405" cy="228" r="1.5"/><circle cx="468" cy="109" r="2"/><circle cx="126" cy="151" r="1"/></g>
+            <g class="island-floating"><path d="M124 159c-1 13 4 36 29 48l111 55c21 10 45 9 66-2l120-65c17-10 24-27 22-42Z" fill="url(#islandSoil)"/><path d="M150 196c14 10 19 24 38 29l49 25-20-29Zm162 26-14 44 40-20 11-35Zm100-28-14 37 35-21 13-32Z" fill="#8f9877" opacity=".3"/><path d="M129 146c-14 8-15 21 2 30l137 65c15 7 35 7 50-1l147-78c14-8 10-21-5-28L327 74c-17-8-36-8-51 0Z" fill="url(#islandGrass)"/><path d="M135 154c-8 4-7 9 0 13l138 66c14 7 28 6 40-1l143-76c9-5 7-9 1-12" fill="none" stroke="#d6e3b7" stroke-width="2" opacity=".7"/>
+              <path d="M260 90c4 21 34 25 51 38s19 28-8 44-29 39-12 55" fill="none" stroke="#dfe2bb" stroke-width="14" stroke-linecap="round"/><path d="M260 90c4 21 34 25 51 38s19 28-8 44-29 39-12 55" fill="none" stroke="#ecebd0" stroke-width="8" stroke-linecap="round" opacity=".8"/>
+              <path d="M170 150c4-15 42-26 58-20 15 6 23 16 10 27-20 18-69 12-68-7Z" fill="#8db9a5"/><path d="M174 147c7-11 36-19 51-15 13 4 18 10 14 17-19-8-40-8-65-2Z" fill="#abd0ba"/><path d="M189 153c8-2 19-2 25 0m5-9 10 1" fill="none" stroke="#d5e4cd" stroke-width="1.2" stroke-linecap="round"/>
+              <g fill="#8f9b73"><path d="m362 168 3-9 7 8 5 1-5 6h-13Z"/><path d="m384 179 2-6 6 4 3 4-6 2h-6Z"/></g><g fill="#c6cdad"><path d="m361 167 4-8 7 8-6 2Z"/><path d="m385 178 2-5 5 4-4 3Z"/></g>
+              <g stroke="#91a46d" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M180 182v-7m0 7-4-4m4 4 4-4M352 111v-7m0 7-4-4m4 4 4-4M407 149v-6m0 6-4-3m4 3 4-3M250 212v-6m0 6-4-3m4 3 4-3"/></g><g fill="#e7e4b9"><circle cx="207" cy="184" r="2"/><circle cx="211" cy="181" r="1.5"/><circle cx="391" cy="131" r="2"/><circle cx="394" cy="134" r="1.4"/></g>
+              <g id="gardenPlants"></g><g id="firstSeedMarker"><ellipse cx="327" cy="161" rx="18" ry="8" fill="none" stroke="#7d9860" stroke-width="1.3" stroke-dasharray="3 4" opacity=".7"/><path d="M327 156v-16m-4 3 4-4 4 4" fill="none" stroke="#78915b" stroke-width="1.3" stroke-linecap="round"/></g>
+            </g>
+          </svg>
+          <div class="island-bottom"><p class="island-caption" id="islandCaption"><strong>第一株植物，從下一次專注開始。</strong><br>準備好了，就為自己按下開始吧。</p><span class="island-index" id="islandIndex">ISLAND NO. 001</span></div>
+        </div>
+        <div class="metrics" aria-label="專注與植物統計"><div class="metric"><div class="metric-top">今日專注<svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></div><div class="metric-number"><span id="todayMinutes">0</span><small>分鐘</small></div></div><div class="metric"><div class="metric-top">今日完成<svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg></div><div class="metric-number"><span id="todayRounds">0</span><small>輪專注</small></div></div><div class="metric"><div class="metric-top">小島植物<svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></div><div class="metric-number"><span id="totalPlants">0</span><small>株</small></div></div></div>
+      </section>
+      <section class="card timer-card" id="timerCard" aria-labelledby="timerTitle"><div class="timer-top"><h2 class="timer-title" id="timerTitle"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>留一段時間，給眼前的事</h2><span class="session-badge" id="sessionBadge">FOCUS TIME</span></div><div class="mode-tabs" aria-label="計時模式"><button type="button" id="focusMode" aria-pressed="true">專注</button><button type="button" id="breakMode" aria-pressed="false">短休息</button></div>
+        <div class="timer-dial"><svg viewBox="0 0 230 230" aria-hidden="true"><circle class="dial-track" cx="115" cy="115" r="108"/><circle class="dial-progress" id="dialProgress" cx="115" cy="115" r="108" stroke-dasharray="678.584" stroke-dashoffset="0"/></svg><div class="dial-content"><svg class="icon dial-leaf" aria-hidden="true"><use href="#i-leaf"/></svg><div class="timer-display" id="timerDisplay" role="timer" aria-label="剩餘 25 分鐘">25:00</div><div class="timer-status" id="timerStatus">讓一件小事，慢慢完成</div></div></div>
+        <div class="presets" id="presets" aria-label="專注時長"><button type="button" data-minutes="15" aria-pressed="false">15 分</button><button type="button" data-minutes="25" aria-pressed="true">25 分</button><button type="button" data-minutes="45" aria-pressed="false">45 分</button><button type="button" id="customDuration" aria-pressed="false">自訂</button></div>
+        <div class="task-selector"><label class="sr-only" for="focusTask">選擇這一輪的專注任務</label><select id="focusTask"><option value="">選一件想完成的小事（選填）</option></select></div>
+        <div class="timer-actions"><button type="button" class="primary-button start-button" id="startButton"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span>開始專注</span></button><button type="button" class="reset-button" id="resetButton" aria-label="重設本輪計時"><svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg></button></div>
+        <div class="demo-row"><button type="button" class="demo-button" id="demoButton">試試 10 秒體驗</button><span aria-hidden="true">·</span><span>體驗不列入正式專注統計</span></div><p class="timer-notice" id="timerNotice">完成一輪專注，就會收穫一株植物。</p>
+      </section>
+    </div>
+    <div class="bottom-grid"><section class="card tasks-card" id="tasks" aria-labelledby="tasksTitle"><div class="card-heading"><div class="heading-group"><h2 id="tasksTitle">今天，想做點什麼？</h2><span class="small-count" id="taskTotal">0 件事</span></div><svg class="icon" style="color:#9caa83;width:18px;height:18px" aria-hidden="true"><use href="#i-checklist"/></svg></div><form class="task-form" id="taskForm" novalidate><label class="sr-only" for="taskInput">新增任務，1 至 80 字</label><input class="task-input" id="taskInput" type="text" maxlength="80" placeholder="寫下一件小事，讓想法有個起點…" autocomplete="off" aria-describedby="taskError"><button type="submit" class="add-button" aria-label="新增任務"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button></form><p class="field-error" id="taskError" aria-live="polite"></p><div class="filter-row"><div class="filters" aria-label="篩選任務"><button type="button" data-filter="all" aria-pressed="true">全部</button><button type="button" data-filter="pending" aria-pressed="false">待完成</button><button type="button" data-filter="done" aria-pressed="false">已完成</button></div><span class="remaining-count" id="remainingCount">還有 0 件待完成</span></div><ul class="task-list" id="taskList" aria-label="任務清單"></ul><div class="empty-tasks" id="emptyTasks"><p>大大小小的事，都值得好好完成。</p><small>從一個建議開始，或寫下你自己的任務。</small><div class="suggestions"><button type="button" class="suggestion" data-suggestion="讀 10 頁喜歡的書">建議：讀 10 頁書 ＋</button><button type="button" class="suggestion" data-suggestion="整理今天的課堂筆記">建議：整理筆記 ＋</button><button type="button" class="suggestion" data-suggestion="留一段時間完成作業">建議：完成作業 ＋</button></div></div></section>
+      <section class="card collection-card" id="collection" aria-labelledby="collectionTitle"><div class="card-heading"><div class="heading-group"><h2 id="collectionTitle">慢慢長大的收藏</h2><span class="small-count" id="collectionCount">0 株</span></div><button type="button" class="text-button" id="allPlantsButton">查看全部<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button></div><p class="collection-subtitle">每一株，都是你為自己留下的時間。</p><div class="plant-grid" id="collectionGrid"></div><div class="empty-garden" id="emptyGarden"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg><p>你的小花園，正等著第一株新朋友。</p><small>完成專注，讓這裡一點一點熱鬧起來。</small></div></section></div>
+    <footer class="page-footer"><span>一點點累積，也是一種了不起。</span><button type="button" class="text-button mobile-help" id="mobileHelpButton" style="display:none"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>使用說明與保存狀態</button><span>SMALL STEPS. GROWING DAYS.</span></footer>
+  </main>
+  <dialog id="helpDialog" aria-labelledby="helpTitle"><button type="button" class="dialog-close" data-close="helpDialog" aria-label="關閉使用說明"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button><div class="eyebrow">A LITTLE GUIDE</div><h2 id="helpTitle">讓專注，慢慢長成日常。</h2><ul><li>寫下任務，選擇 15、25、45 分鐘，或自訂 <strong>1–60 分鐘</strong>，再按「開始專注」。</li><li>完成一輪正式專注，收穫一株植物。今日統計只計算已完成的正式專注；暫停或重設不會獲得植物。專注任務完成後，請自行打勾。</li><li><strong>10 秒體驗</strong>也會獲得一株標示「體驗」的植物，但不計入正式專注分鐘與輪數。短休息固定 5 分鐘，不會種植。</li><li>切換分頁或重新整理後，計時會依實際時間繼續；下次開啟時，已完成的一輪只會獎勵一次。關閉網頁時不會發出通知。</li><li>資料保存在<strong>目前瀏覽器的本機儲存空間</strong>，不會上傳，也不會跨裝置同步。清除網站資料、使用無痕模式、變更瀏覽器，或從本機檔案改到網站網址，可能看不到原本的資料。</li></ul><p id="helpStorageState"></p><div class="dialog-actions"><button type="button" class="primary-button" data-close="helpDialog">開始慢慢長大</button></div></dialog>
+  <dialog id="confirmDialog" aria-labelledby="confirmTitle" aria-describedby="confirmText"><h2 id="confirmTitle">要重新開始這一輪嗎？</h2><p id="confirmText">目前的計時進度將會清除，這一輪不會獲得植物。</p><div class="dialog-actions"><button type="button" class="secondary-button" id="cancelConfirm">保留計時</button><button type="button" class="primary-button" id="acceptConfirm">確定重新開始</button></div></dialog>
+  <dialog id="customDialog" aria-labelledby="customTitle"><button type="button" class="dialog-close" data-close="customDialog" aria-label="關閉自訂時長"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button><div class="eyebrow">YOUR OWN PACE</div><h2 id="customTitle">找到剛剛好的節奏。</h2><form id="customForm" novalidate><label class="custom-label" for="customMinutes">想專注多久？</label><div class="custom-field"><input id="customMinutes" type="number" min="1" max="60" step="1" inputmode="numeric" value="25" aria-describedby="customError"><span>分鐘（1–60）</span></div><p class="field-error" id="customError" aria-live="polite"></p><div class="dialog-actions"><button type="button" class="secondary-button" data-close="customDialog">先不調整</button><button type="submit" class="primary-button">設定專注時間</button></div></form></dialog>
+  <dialog id="plantDialog" aria-labelledby="plantDetailTitle"><button type="button" class="dialog-close" data-close="plantDialog" aria-label="關閉植物介紹"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button><span class="detail-label" id="plantDetailLabel">A MOMENT, A LITTLE GROWTH</span><svg class="detail-plant" viewBox="0 0 100 110" aria-hidden="true"><use id="plantDetailArt" href="#plant-sprout"/></svg><h2 class="detail-title" id="plantDetailTitle"></h2><p class="detail-info" id="plantDetailInfo"></p><p class="detail-info" id="plantDetailMessage"></p><div class="dialog-actions"><button type="button" class="primary-button" data-close="plantDialog">好好收藏</button></div></dialog>
+  <dialog class="garden-dialog" id="gardenDialog" aria-labelledby="gardenDialogTitle"><button type="button" class="dialog-close" data-close="gardenDialog" aria-label="關閉全部收藏"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button><div class="eyebrow">EVERY LITTLE EFFORT COUNTS</div><h2 id="gardenDialogTitle">你留下的每一份專注。</h2><p id="gardenDialogDescription"></p><div class="plant-grid" id="allPlantsGrid"></div><button type="button" class="secondary-button load-more" id="loadMorePlants">再看看更多植物</button></dialog>
+  <div class="toast" id="toast"><span id="toastText"></span><button type="button" id="undoButton" hidden>撤銷刪除</button></div><div class="sr-only" id="announcer" role="status" aria-live="polite" aria-atomic="true"></div><div class="leaf-burst" id="leafBurst" aria-hidden="true"></div>
+  <script>
+  (() => {
+    'use strict';
+    const STORAGE_KEY = 'focus-island:v1';
+    const $ = id => document.getElementById(id);
+    const species = ['sprout', 'fern', 'bloom', 'tree'];
+    const plantNames = {sprout:'初光小芽',fern:'柔風蕨葉',bloom:'暖陽小花',tree:'安靜小樹'};
+    const plantMessages = {sprout:'每個小小的開始，都藏著慢慢長大的可能。',fern:'一步一步地舒展，找到屬於自己的節奏。',bloom:'認真照顧的時間，終於開成了一朵小花。',tree:'今天留下的專注，會成為明天溫柔的樹蔭。'};
+    const svgNS = 'http://www.w3.org/2000/svg';
+    let filter = 'all', toastTimeout, undoTask = null, storageIssue = '', gardenLimit = 24, lastDate = '';
+    let confirmResolve = null;
+    const uid = () => globalThis.crypto && typeof globalThis.crypto.randomUUID === 'function' ? globalThis.crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+    const newTimer = (mode='focus', minutes=25, demo=false, taskId=null) => ({id:uid(),mode,totalMs:demo?10000:minutes*60000,remainingMs:demo?10000:minutes*60000,status:'idle',deadline:null,demo,taskId});
+    const freshState = () => ({version:1,tasks:[],plants:[],focusMinutes:25,timer:newTimer()});
+    const isFiniteNumber = value => typeof value === 'number' && Number.isFinite(value);
+    const isTimestamp = value => isFiniteNumber(value) && value >= 0 && Number.isFinite(new Date(value).getTime());
+    const isId = value => typeof value === 'string' && value.length > 0 && value.length <= 100;
+    function validateState(data) {
+      if (!data || data.version !== 1 || !Array.isArray(data.tasks) || !Array.isArray(data.plants) || !Number.isInteger(data.focusMinutes) || data.focusMinutes < 1 || data.focusMinutes > 60 || data.tasks.length > 2000 || data.plants.length > 10000) throw new Error('Invalid saved data');
+      const taskIds = new Set(), plantIds = new Set();
+      const tasks = data.tasks.map(t => {
+        if (!t || !isId(t.id) || taskIds.has(t.id) || typeof t.text !== 'string' || !t.text.trim() || t.text.trim().length > 80 || typeof t.done !== 'boolean' || !isTimestamp(t.createdAt)) throw new Error('Invalid saved task');
+        taskIds.add(t.id); return {id:t.id,text:t.text.trim(),done:t.done,createdAt:t.createdAt};
+      });
+      const plants = data.plants.map(p => {
+        if (!p || !isId(p.id) || plantIds.has(p.id) || !isTimestamp(p.createdAt) || typeof p.demo !== 'boolean' || !species.includes(p.species) || !Number.isInteger(p.minutes) || (p.demo ? p.minutes !== 0 : p.minutes < 1 || p.minutes > 60)) throw new Error('Invalid saved plant');
+        plantIds.add(p.id); return {id:p.id,createdAt:p.createdAt,demo:p.demo,minutes:p.minutes,species:p.species};
+      });
+      const t = data.timer;
+      if (!t || !isId(t.id) || !['focus','break'].includes(t.mode) || !['idle','running','paused','completed'].includes(t.status) || typeof t.demo !== 'boolean' || !isFiniteNumber(t.totalMs) || !isFiniteNumber(t.remainingMs) || t.remainingMs < 0 || t.remainingMs > t.totalMs) throw new Error('Invalid timer');
+      if (t.mode === 'break' ? t.totalMs !== 300000 || t.demo : t.demo ? t.totalMs !== 10000 : !Number.isInteger(t.totalMs / 60000) || t.totalMs < 60000 || t.totalMs > 3600000) throw new Error('Invalid duration');
+      if (t.status === 'running' && !isTimestamp(t.deadline)) throw new Error('Invalid deadline');
+      const timer = {id:t.id,mode:t.mode,totalMs:t.totalMs,remainingMs:t.remainingMs,status:t.status,deadline:t.status==='running'?t.deadline:null,demo:t.demo,taskId:taskIds.has(t.taskId)?t.taskId:null};
+      return {version:1,tasks,plants,focusMinutes:data.focusMinutes,timer};
+    }
+    function readState() {
+      try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? validateState(JSON.parse(raw)) : freshState(); }
+      catch (error) { storageIssue = error instanceof SyntaxError || error.message.startsWith('Invalid') ? '原本的保存資料無法讀取，已建立新的小島。' : '瀏覽器目前無法讀取本機保存。'; return freshState(); }
+    }
+    let state = readState();
+    function save() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); if (storageIssue.startsWith('瀏覽器') || storageIssue.startsWith('儲存空間')) storageIssue = ''; }
+      catch (_) { storageIssue = '儲存空間無法使用，目前資料只會留在這個分頁。'; }
+      renderStorage();
+    }
+    function renderStorage() {
+      const warning = Boolean(storageIssue);
+      $('storageStatus').querySelector('span').textContent = warning ? '請留意保存狀態' : '本機保存已開啟';
+      $('storageStatus').querySelector('i').style.background = warning ? '#bb7257' : '#75955d';
+      $('storageDetail').textContent = warning ? storageIssue : '你的小島，會留在這個瀏覽器。下次回來，再接著慢慢長大。';
+      $('helpStorageState').textContent = warning ? '目前保存狀態：' + storageIssue : '目前保存狀態：已啟用本機保存。';
+      $('mobileHelpButton').style.color = warning ? 'var(--clay)' : '';
+    }
+    function announce(message) { $('announcer').textContent = ''; setTimeout(() => {$('announcer').textContent = message;}, 20); }
+    function toast(message, undo=false) {
+      clearTimeout(toastTimeout); $('toastText').textContent = message; $('undoButton').hidden = !undo; $('toast').classList.add('visible');
+      announce(message + (undo ? '，可使用撤銷刪除按鈕還原。' : ''));
+      toastTimeout = setTimeout(() => { $('toast').classList.remove('visible'); $('undoButton').hidden = true; undoTask = null; }, undo?9000:5500);
+    }
+    const localDay = timestamp => {const d = new Date(timestamp); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();};
+    function renderDate() {
+      const date = new Date(), today = localDay(date.getTime());
+      if (lastDate === today) return;
+      lastDate = today;
+      $('todayDate').dateTime = date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');
+      $('todayDate').querySelector('span').textContent = new Intl.DateTimeFormat('zh-TW',{month:'long',day:'numeric',weekday:'long'}).format(date);
+      const hour = date.getHours();
+      $('greeting').textContent = (hour<5?'夜深了':hour<12?'早安':hour<18?'午安':'晚安') + '，留一點時間給自己，讓每一份專注慢慢發芽。';
+      renderStats();
+    }
+    function renderStats() {
+      const today = localDay(Date.now());
+      const formal = state.plants.filter(p => !p.demo && localDay(p.createdAt) === today);
+      $('todayMinutes').textContent = formal.reduce((sum,p) => sum+p.minutes,0);
+      $('todayRounds').textContent = formal.length;
+      $('totalPlants').textContent = state.plants.length;
+      $('collectionCount').textContent = state.plants.length + ' 株';
+    }
+    function svgUse(symbol, cls, viewBox) {
+      const svg = document.createElementNS(svgNS, 'svg'); if(cls) svg.setAttribute('class',cls); svg.setAttribute('aria-hidden','true');
+      if(viewBox) svg.setAttribute('viewBox',viewBox);
+      const use = document.createElementNS(svgNS,'use');use.setAttribute('href','#'+symbol);svg.append(use);return svg;
+    }
+    function renderIsland() {
+      const points = [[267,99,69],[329,119,66],[233,139,63],[366,96,62],[312,80,63],[403,128,58],[192,118,57],[275,173,52],[370,170,54],[219,168,51],[345,63,51],[410,100,47],[301,145,48],[248,79,48],[329,183,44],[179,140,44]];
+      const group = $('gardenPlants');group.replaceChildren();
+      const plants = state.plants.slice(-points.length);
+      plants.forEach((plant,i) => { const [x,y,size] = points[i]; const use = document.createElementNS(svgNS,'use');use.setAttribute('href','#plant-'+plant.species);use.setAttribute('x',x-size/2);use.setAttribute('y',y-size*.94);use.setAttribute('width',size);use.setAttribute('height',size*1.1);group.append(use); });
+      $('firstSeedMarker').style.display = plants.length ? 'none' : '';
+      const count=state.plants.length;
+      const strong=document.createElement('strong'), br=document.createElement('br'), text=document.createTextNode('');
+      strong.textContent=count===0?'第一株植物，從下一次專注開始。':count<4?'你的小島，開始有了自己的風景。':count<10?'一點一點，小島正悄悄熱鬧起來。':'這一片綠意，都是你認真生活的痕跡。';
+      text.textContent=count===0?'準備好了，就為自己按下開始吧。':'已收藏 '+count+' 株植物，下一次專注也值得期待。';
+      $('islandCaption').replaceChildren(strong,br,text);
+      $('islandIndex').textContent = count===0?'ISLAND NO. 001':'GROWING · '+String(count).padStart(3,'0');
+      $('islandSvgDesc').textContent='一座有小池塘、石子與步道的綠色浮島，目前共有 '+count+' 株收藏植物'+(count>points.length?'，圖中展示最近的 '+points.length+' 株。':'。');
+    }
+    function plantTile(plant) {
+      const button=document.createElement('button');button.type='button';button.className='plant-tile';button.setAttribute('aria-label',plantNames[plant.species]+(plant.demo?'，體驗植物':'，'+plant.minutes+' 分鐘專注獎勵')+'，查看介紹');
+      button.append(svgUse('plant-'+plant.species,'','0 0 100 110'));
+      const name=document.createElement('span');name.className='plant-name';name.textContent=plantNames[plant.species];button.append(name);
+      if(plant.demo){const badge=document.createElement('span');badge.className='plant-tiny-badge';badge.textContent='體驗';button.append(badge);}
+      button.addEventListener('click',()=>showPlant(plant));return button;
+    }
+    function renderCollection() {
+      const grid=$('collectionGrid');grid.replaceChildren();
+      state.plants.slice(-6).reverse().forEach(plant=>grid.append(plantTile(plant)));
+      $('emptyGarden').hidden=state.plants.length>0;
+      $('emptyGarden').style.display=state.plants.length>0?'none':'flex';
+      $('allPlantsButton').disabled=state.plants.length===0;
+      renderStats();renderIsland();
+      if($('gardenDialog').open) renderAllPlants();
+    }
+    function showPlant(plant) {
+      $('plantDetailArt').setAttribute('href','#plant-'+plant.species);
+      $('plantDetailLabel').textContent=plant.demo?'一株小小的體驗紀念':'A MOMENT, A LITTLE GROWTH';
+      $('plantDetailTitle').textContent=plantNames[plant.species];
+      const formatted=new Intl.DateTimeFormat('zh-TW',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(plant.createdAt));
+      $('plantDetailInfo').textContent=formatted+' · '+(plant.demo?'10 秒體驗植物，不列入正式專注統計。':'完成 '+plant.minutes+' 分鐘專注的紀念。');
+      $('plantDetailMessage').textContent=plantMessages[plant.species];$('plantDialog').showModal();
+    }
+    function renderAllPlants() {
+      $('gardenDialogDescription').textContent='共 '+state.plants.length+' 株植物，其中 '+state.plants.filter(p=>p.demo).length+' 株為體驗植物。依獲得時間由新到舊排列。';
+      const grid=$('allPlantsGrid');grid.replaceChildren();state.plants.slice().reverse().slice(0,gardenLimit).forEach(p=>grid.append(plantTile(p)));
+      $('loadMorePlants').hidden=gardenLimit>=state.plants.length;
+    }
+    function renderTasks() {
+      const list=$('taskList');list.replaceChildren();
+      const visible=state.tasks.filter(t=>filter==='all'||(filter==='done'?t.done:!t.done));
+      visible.forEach(task=>{
+        const li=document.createElement('li');li.className='task-item'+(task.done?' done':'');li.dataset.taskId=task.id;
+        const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.className='task-check';checkbox.checked=task.done;checkbox.id='task-'+task.id;checkbox.setAttribute('aria-label',(task.done?'標記為待完成：':'完成任務：')+task.text);
+        checkbox.addEventListener('change',()=>{task.done=checkbox.checked;save();renderTasks();announce(task.done?'已完成：'+task.text:'已將任務設為待完成。');const retained=$('task-'+task.id);if(retained)retained.focus();});
+        const label=document.createElement('label');label.htmlFor=checkbox.id;label.className='task-text';label.textContent=task.text;
+        const remove=document.createElement('button');remove.type='button';remove.className='delete-task';remove.setAttribute('aria-label','刪除任務：'+task.text);remove.append(svgUse('i-trash','icon'));remove.addEventListener('click',()=>deleteTask(task.id));
+        li.append(checkbox,label,remove);list.append(li);
+      });
+      $('taskTotal').textContent=state.tasks.length+' 件事';$('remainingCount').textContent='還有 '+state.tasks.filter(t=>!t.done).length+' 件待完成';
+      document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));
+      const empty=$('emptyTasks');empty.hidden=visible.length>0;
+      if(!visible.length){empty.querySelector('p').textContent=state.tasks.length===0?'大大小小的事，都值得好好完成。':filter==='done'?'還沒有打勾的任務，慢慢來就好。':'待完成清單已清空，給自己一點掌聲！';empty.querySelector('small').hidden=state.tasks.length>0;empty.querySelector('.suggestions').hidden=state.tasks.length>0;}
+      renderTaskSelector();
+    }
+    function renderTaskSelector() {
+      const select=$('focusTask');select.replaceChildren();
+      const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent=state.timer.mode==='break'?'休息一下，讓想法也透透氣。':'選一件想完成的小事（選填）';select.append(placeholder);
+      state.tasks.filter(t=>!t.done||t.id===state.timer.taskId).forEach(t=>{const option=document.createElement('option');option.value=t.id;option.textContent=(t.done?'✓ ':'')+t.text;select.append(option);});
+      select.value=state.timer.taskId||'';select.disabled=state.timer.mode==='break';
+    }
+    function addTask(text) {
+      text=text.trim();if(!text||text.length>80){$('taskError').textContent=!text?'先寫下一件想做的事吧。':'任務請保留在 80 字以內。';$('taskInput').setAttribute('aria-invalid','true');$('taskInput').focus();return false;}
+      if(state.tasks.length>=2000){$('taskError').textContent='任務已達 2,000 件，請先刪除一些舊任務。';return false;}
+      state.tasks.unshift({id:uid(),text,done:false,createdAt:Date.now()});filter='all';$('taskInput').value='';$('taskError').textContent='';$('taskInput').removeAttribute('aria-invalid');save();renderTasks();announce('已新增任務：'+text);return true;
+    }
+    function deleteTask(id) {
+      const index=state.tasks.findIndex(t=>t.id===id);if(index<0)return;
+      undoTask={task:state.tasks[index],index,selected:state.timer.taskId===id};state.tasks.splice(index,1);if(state.timer.taskId===id)state.timer.taskId=null;
+      save();renderTasks();toast('已刪除這件小事。',true);$('undoButton').focus({preventScroll:true});
+    }
+    function renderTimer() {
+      const t=state.timer, running=t.status==='running',paused=t.status==='paused',completed=t.status==='completed';
+      $('timerCard').classList.toggle('break-mode',t.mode==='break');$('timerCard').classList.toggle('demo-mode',t.demo);
+      $('focusMode').setAttribute('aria-pressed',String(t.mode==='focus'));$('breakMode').setAttribute('aria-pressed',String(t.mode==='break'));
+      $('sessionBadge').textContent=t.demo?'10 SEC · 體驗':t.mode==='break'?'REST TIME':'FOCUS TIME';
+      $('presets').hidden=t.mode==='break';$('presets').style.display=t.mode==='break'?'none':'flex';
+      document.querySelectorAll('[data-minutes]').forEach(b=>b.setAttribute('aria-pressed',String(t.mode==='focus'&&!t.demo&&Number(b.dataset.minutes)*60000===t.totalMs)));
+      $('customDuration').setAttribute('aria-pressed',String(!t.demo&&t.mode==='focus'&&![15,25,45].includes(t.totalMs/60000)));
+      const label=running?'暫停一下':paused?'繼續'+(t.mode==='break'?'休息':'專注'):completed?'再'+(t.mode==='break'?'休息':'專注')+'一輪':t.mode==='break'?'開始休息':t.demo?'開始 10 秒體驗':'開始專注';
+      $('startButton').querySelector('span').textContent=label;$('startButton').querySelector('use').setAttribute('href',running?'#i-pause':'#i-play');
+      $('timerStatus').textContent=completed?(t.mode==='break'?'休息完成，準備好再出發':t.demo?'體驗完成，小芽已入收藏':'這份專注，已長成一株植物'):paused?'先喘口氣，隨時繼續':running?(t.mode==='break'?'把肩膀放鬆，讓心透透氣':t.demo?'十秒鐘，也能看看小島的魔法':'心無旁騖，陪自己走這一段'):t.mode==='break'?'休息，也在照顧往前的力氣':'讓一件小事，慢慢完成';
+      $('timerNotice').textContent=t.mode==='break'?'短休息固定 5 分鐘，不會獲得植物。':t.demo?'體驗完成會獲得一株「體驗」植物。':'完成一輪專注，就會收穫一株植物。';
+      renderTaskSelector();renderClock();
+    }
+    function remaining() {return state.timer.status==='running'?Math.max(0,Math.min(state.timer.totalMs,state.timer.deadline-Date.now())):state.timer.remainingMs;}
+    function renderClock() {
+      const ms=remaining(), seconds=Math.ceil(ms/1000), minutes=Math.floor(seconds/60), secs=seconds%60;
+      const text=String(minutes).padStart(2,'0')+':'+String(secs).padStart(2,'0');
+      if($('timerDisplay').textContent!==text){$('timerDisplay').textContent=text;$('timerDisplay').setAttribute('aria-label','剩餘 '+minutes+' 分 '+secs+' 秒');}
+      $('dialProgress').style.strokeDashoffset=String(678.584*(1-ms/state.timer.totalMs));
+      document.title=state.timer.status==='running'?text+' · '+(state.timer.mode==='break'?'休息中':'專注中')+'｜專注小島':'專注小島 Focus Island';
+    }
+    function burst() {
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+      const container=$('leafBurst');container.replaceChildren();for(let i=0;i<16;i++){const leaf=document.createElement('i');leaf.className='burst-leaf';leaf.style.setProperty('--dx',((Math.random()-.5)*600)+'px');leaf.style.setProperty('--dy',(130+Math.random()*300)+'px');leaf.style.setProperty('--rot',(Math.random()*600-300)+'deg');leaf.style.animationDelay=(Math.random()*.25)+'s';container.append(leaf);}setTimeout(()=>container.replaceChildren(),2500);
+    }
+    function finishTimer(restored=false) {
+      const t=state.timer;if(t.status!=='running'||remaining()>0)return;
+      const completedAt=t.deadline;t.remainingMs=0;t.status='completed';t.deadline=null;
+      let awarded=false;
+      if(t.mode==='focus'&&!state.plants.some(p=>p.id===t.id)){
+        if(state.plants.length<10000){state.plants.push({id:t.id,createdAt:completedAt,demo:t.demo,minutes:t.demo?0:t.totalMs/60000,species:species[state.plants.length%species.length]});awarded=true;}
+      }
+      save();renderTimer();renderCollection();
+      if(awarded){toast((restored?'歡迎回來！':'完成了！')+(t.demo?'一株體驗小芽已加入收藏。':'你又為小島種下了一株植物。'));if(!restored)burst();}
+      else if(t.mode==='break')toast('休息完成，準備好了就再往前一點。');
+      else if(state.plants.length>=10000)toast('本輪專注完成。植物收藏已達 10,000 株上限。');
+    }
+    function tick(){renderDate();if(state.timer.status==='running'){if(remaining()<=0)finishTimer();else renderClock();}}
+    function askReset(message) {
+      $('confirmText').textContent=message||'目前的計時進度將會清除，這一輪不會獲得植物。';$('confirmDialog').showModal();$('cancelConfirm').focus();
+      return new Promise(resolve=>{confirmResolve=resolve;});
+    }
+    function resolveConfirm(result){$('confirmDialog').close();if(confirmResolve){const resolve=confirmResolve;confirmResolve=null;resolve(result);}}
+    async function changeTimer(action,message){tick();if(['running','paused'].includes(state.timer.status)&&!await askReset(message))return;action();save();renderTimer();}
+    function setFocus(minutes){state.focusMinutes=minutes;state.timer=newTimer('focus',minutes,false,state.timer.taskId);}
+    $('taskForm').addEventListener('submit',event=>{event.preventDefault();addTask($('taskInput').value);});
+    $('taskInput').addEventListener('input',()=>{if($('taskInput').value.trim()){$('taskError').textContent='';$('taskInput').removeAttribute('aria-invalid');}});
+    document.querySelectorAll('[data-suggestion]').forEach(button=>button.addEventListener('click',()=>{if(addTask(button.dataset.suggestion))toast('已加入建議任務，也可以換成你自己的小事。');}));
+    document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.filter;renderTasks();}));
+    $('undoButton').addEventListener('click',()=>{if(!undoTask)return;const old=undoTask;state.tasks.splice(Math.min(old.index,state.tasks.length),0,old.task);if(old.selected&&!state.timer.taskId)state.timer.taskId=old.task.id;undoTask=null;save();renderTasks();toast('任務已經回來了。');const checkbox=$('task-'+old.task.id);if(checkbox)checkbox.focus();});
+    $('focusTask').addEventListener('change',()=>{state.timer.taskId=$('focusTask').value||null;save();});
+    $('startButton').addEventListener('click',()=>{
+      tick();let t=state.timer;
+      if(t.status==='running'){t.remainingMs=remaining();t.deadline=null;t.status='paused';announce('計時已暫停。');}
+      else{if(t.status==='completed'){state.timer=newTimer(t.mode,t.totalMs/60000,t.demo,t.taskId);t=state.timer;}t.deadline=Date.now()+t.remainingMs;t.status='running';announce((t.mode==='break'?'休息':'專注')+'計時已開始。');}
+      save();renderTimer();
+    });
+    $('resetButton').addEventListener('click',()=>changeTimer(()=>{const t=state.timer;state.timer=newTimer(t.mode,t.totalMs/60000,t.demo,t.taskId);announce('本輪計時已重設。');}));
+    $('focusMode').addEventListener('click',()=>{if(state.timer.mode!=='focus')changeTimer(()=>{state.timer=newTimer('focus',state.focusMinutes,false,state.timer.taskId);},'切換到專注會清除目前這一輪的進度，確定要重新開始嗎？');});
+    $('breakMode').addEventListener('click',()=>{if(state.timer.mode!=='break')changeTimer(()=>{state.timer=newTimer('break',5,false,state.timer.taskId);},'切換到短休息會清除目前這一輪的進度，這一輪不會獲得植物。');});
+    document.querySelectorAll('[data-minutes]').forEach(button=>button.addEventListener('click',()=>{const minutes=Number(button.dataset.minutes);if(state.timer.mode==='focus'&&!state.timer.demo&&state.timer.totalMs===minutes*60000)return;changeTimer(()=>setFocus(minutes),'調整時間會清除目前這一輪的進度，這一輪不會獲得植物。');}));
+    $('customDuration').addEventListener('click',()=>{$('customMinutes').value=state.focusMinutes;$('customError').textContent='';$('customMinutes').removeAttribute('aria-invalid');$('customDialog').showModal();$('customMinutes').focus();$('customMinutes').select();});
+    $('customForm').addEventListener('submit',async event=>{event.preventDefault();const raw=$('customMinutes').value.trim(),minutes=Number(raw);if(!raw||!Number.isInteger(minutes)||minutes<1||minutes>60){$('customError').textContent='請輸入 1 到 60 之間的整數分鐘。';$('customMinutes').setAttribute('aria-invalid','true');$('customMinutes').focus();return;}$('customDialog').close();await changeTimer(()=>setFocus(minutes),'調整時間會清除目前這一輪的進度，這一輪不會獲得植物。');});
+    $('demoButton').addEventListener('click',()=>changeTimer(()=>{state.timer=newTimer('focus',0,true,state.timer.taskId);announce('已切換為 10 秒體驗。按開始即可體驗，體驗不列入正式專注統計。');},'切換到 10 秒體驗會清除目前這一輪的進度，這一輪不會獲得正式專注植物。'));
+    $('cancelConfirm').addEventListener('click',()=>resolveConfirm(false));$('acceptConfirm').addEventListener('click',()=>resolveConfirm(true));$('confirmDialog').addEventListener('cancel',event=>{event.preventDefault();resolveConfirm(false);});
+    document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',()=>$(button.dataset.close).close()));
+    $('helpButton').addEventListener('click',()=>{$('helpDialog').showModal();});$('mobileHelpButton').addEventListener('click',()=>{$('helpDialog').showModal();});
+    $('allPlantsButton').addEventListener('click',()=>{gardenLimit=24;renderAllPlants();$('gardenDialog').showModal();});$('loadMorePlants').addEventListener('click',()=>{gardenLimit+=24;renderAllPlants();});
+    document.querySelectorAll('[data-nav]').forEach(link=>link.addEventListener('click',()=>{document.querySelectorAll('[data-nav]').forEach(other=>{other.classList.remove('active');other.removeAttribute('aria-current');});link.classList.add('active');link.setAttribute('aria-current','page');}));
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick();});
+    window.addEventListener('pageshow',()=>tick());
+    // Each active session keeps its absolute deadline; storage is written at state changes only.
+    renderStorage();renderDate();renderTasks();renderCollection();renderTimer();
+    if(state.timer.status==='running'&&remaining()<=0)finishTimer(true);
+    else if(state.timer.status==='running')announce('已恢復上次的計時。');
+    if(storageIssue)toast(storageIssue);
+    setInterval(tick,250);
+  })();
+  </script>
+</body>
+</html>
