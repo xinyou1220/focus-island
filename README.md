@@ -1,42 +1,53 @@
 # 專注小島 Focus Island
 
-一個把任務、專注倒數與種植回饋放在一起的互動網頁。完成一輪專注，讓小島多一點綠意。
+把專注的時間，種成一座小島。
 
-## 開啟作品
+專注小島是一個輕量的個人專注工具，結合任務清單、倒數計時與植物收藏。從一件想完成的小事開始，每完成一輪專注，就為自己的小島留下一株植物。
 
-直接用瀏覽器開啟 `index.html` 即可操作，不需安裝套件。網頁程式、樣式和插畫都在同一檔案內。
+**[線上體驗](https://xinyou1220.github.io/focus-island/)**
 
-先新增一個小任務，再開始專注。想快速確認互動時，可使用「10 秒體驗」；體驗植物會清楚標示，且不計入正式專注統計。資料只保存在目前裝置的此瀏覽器，不會雲端同步。
+![專注小島介面](screenshots/desktop-verified.jpg)
 
-## 作業材料
+## 功能
 
-- `index.html`：可操作的完整網頁。
-- `SPEC.md`：功能、介面、資料規則及驗收條件。
-- `AI_NOTES.md`：真實的 AI 協作與修改紀錄。
-- `TEST_RESULTS.md`：實際驗證結果與限制。
-- `SUBMISSION.md`：可貼到作業文字輸入區的繳交草稿。
-- `screenshots/`：完成驗證後保留的介面截圖。
-- `tests/timer-check.cjs`：可重現的 14 項計時與保存邏輯測試，使用 Node 執行；網頁本身不需要它。
+- **任務清單**：新增、完成、篩選與刪除任務，支援撤銷刪除。
+- **專注倒數**：15、25、45 分鐘快捷設定，或自訂 1～60 分鐘；可暫停、繼續與重設。
+- **短暫休息**：提供 5 分鐘休息模式，讓下一段專注更有餘裕。
+- **12 種植物**：完成倒數後依序獲得植物，收藏會隨每一輪努力慢慢增加。
+- **植物圖鑑**：預覽所有植物造型與專屬文字，查看已收集的種類。
+- **10 秒體驗**：快速走完計時到種植的流程，體驗成果獨立標示。
+- **自動保存**：任務、植物與計時狀態保存在目前瀏覽器，重新開啟可接續使用。
+- **響應式介面**：支援桌面與手機、鍵盤操作及減少動態效果偏好。
 
-## GitHub Pages 發布
+## 遇見 12 種小風景
 
-網站網址：[專注小島](https://xinyou1220.github.io/focus-island/)（已發布並完成公開操作驗證）
+初光小芽、柔風蕨葉、暖陽小花、安靜小樹、晴日仙人掌、圓夢多肉、森呼吸龜背芋、向光向日葵、暮色薰衣草、春日鬱金香、節節青竹、微風櫻花。
 
-原始碼：[GitHub 儲存庫](https://github.com/xinyou1220/focus-island)
+每獲得一株植物就前進一種，12 種循環出現。圖鑑預覽不會增加收藏數；體驗植物會保留「體驗」標記，不列入正式專注分鐘與輪數。
 
-![專注小島操作後的介面截圖](screenshots/desktop-verified.jpg)
+![12 種植物圖鑑](screenshots/plant-catalog.jpg)
 
-若使用 GitHub 網站手動上傳：
+## 開始使用
 
-1. 在自己的 GitHub 建立公開儲存庫，名稱可使用 `focus-island`。
-2. 將 `index.html` 上傳到儲存庫最外層並提交。規格、紀錄與截圖可一併上傳供查閱；網頁本身只需要 `index.html`。
-3. 開啟儲存庫的 **Settings → Pages**。
-4. 在 **Build and deployment** 選擇 **Deploy from a branch**，分支選 `main`、資料夾選 `/(root)`，儲存。
-5. 等待部署完成，使用 Pages 頁面顯示的實際網站網址；不要把儲存庫頁面或本機預覽連結當成繳交網址。
-6. 用未登入的視窗開啟網站，測試新增任務及 10 秒體驗，再將真實網址填入 `SUBMISSION.md`。
+1. 開啟 [線上網站](https://xinyou1220.github.io/focus-island/)，或直接用瀏覽器開啟 `index.html`。
+2. 寫下一件想完成的小事，選擇這一輪的專注時間。
+3. 按下開始，完成後到小島與收藏看看新植物。
 
-上述發布方式依據 [GitHub 官方：建立 Pages 網站](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) 與 [設定發布來源](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
+不需要帳號、安裝步驟或後端服務。HTML、CSS、JavaScript 與 SVG 插畫都包含在單一 `index.html`，沒有外部字型或程式庫依賴。
 
-## 繳交提醒
+## 專案內容
 
-依作業要求，正常期限為 **2026/10/19 23:59（台灣時間）**，遲交期限為 **2026/10/20 16:00**。在課程的文字輸入區提交標題、公開網站連結、介面截圖及規格文字；不用另做 PDF。
+- `index.html`：完整應用程式與內嵌植物插畫。
+- `SPEC.md`：功能規則與介面規格。
+- `tests/timer-check.cjs`：計時、保存、收藏與資料相容性檢查。
+- `screenshots/`：桌面、手機與植物圖鑑截圖。
+
+使用 Node.js 可執行邏輯檢查：
+
+```sh
+node tests/timer-check.cjs
+```
+
+## 資料保存
+
+進度使用 localStorage 儲存在目前裝置的此瀏覽器，沒有雲端同步。清除網站資料、切換瀏覽器或網址，可能看不到原本的進度。網頁關閉時不會發出通知；再次開啟後會依保存的截止時間恢復與結算。

@@ -72,6 +72,29 @@ function test(name,fn){try{fn();results.push({name,result:'PASS'});}catch(e){res
       assert.equal(recovered.api.addTask('恢復後可繼續操作'),true);
     });
   }
+  r=run();await r.click('demoButton');let legacyFourRaw;
+  for(let i=0;i<12;i++){await r.click('startButton');r.advance(10000);if(i===3)legacyFourRaw=r.raw();}
+  const twelve=serial(r.api.getState().plants);
+  test('12 completions collect 12 distinct rendered plant kinds',()=>{
+    assert.equal(twelve.length,12);assert.equal(new Set(twelve.map(p=>p.species)).size,12);
+    for(const plant of twelve){assert.ok(html.includes('id="plant-'+plant.species+'"'),'Missing inline art: '+plant.species);r.api.showPlant(plant);assert.ok(r.get('plantDetailTitle').textContent);assert.ok(r.get('plantDetailMessage').textContent);}
+    assert.equal(String(r.get('todayMinutes').textContent),'0');
+  });
+  await r.click('startButton');r.advance(10000);
+  test('13th completion cycles the collection without replacing old plants',()=>{
+    const plants=r.api.getState().plants;assert.equal(plants.length,13);assert.equal(plants[12].species,plants[0].species);assert.notEqual(plants[12].id,plants[0].id);assert.deepEqual(serial(plants.slice(0,12)),twelve);
+  });
+  const legacy=JSON.parse(legacyFourRaw);legacy.tasks.push({id:'legacy-task',text:'保留原有任務',done:false,createdAt:r.now()});legacy.focusMinutes=17;
+  legacy.timer={id:'legacy-paused-session',mode:'focus',totalMs:1020000,remainingMs:12000,status:'paused',deadline:null,demo:false,taskId:'legacy-task'};
+  r=run({raw:JSON.stringify(legacy)});
+  test('version 1 four-kind save retains plants tasks and paused timer',()=>{
+    const restored=r.api.getState();assert.deepEqual(serial(restored.plants),legacy.plants);assert.deepEqual(serial(restored.tasks),legacy.tasks);assert.equal(restored.focusMinutes,17);assert.equal(restored.timer.status,'paused');assert.equal(r.api.remaining(),12000);
+  });
+  const beforeCatalog=serial(r.api.getState());await r.click('catalogButton');
+  test('catalog previews all 12 kinds without adding rewards or progress',()=>{
+    assert.equal(r.get('catalogGrid').children.length,12);assert.match(r.get('catalogDescription').textContent,/4 \/ 12/);assert.deepEqual(serial(r.api.getState()),beforeCatalog);
+    for(const tile of r.get('catalogGrid').children){assert.ok(tile.attributes['aria-label']);}
+  });
   console.log(JSON.stringify({sourcePath,passed:results.filter(r=>r.result==='PASS').length,failed:results.filter(r=>r.result==='FAIL').length,results},null,2));
   if(results.some(r=>r.result==='FAIL')) process.exitCode=1;
 })();
